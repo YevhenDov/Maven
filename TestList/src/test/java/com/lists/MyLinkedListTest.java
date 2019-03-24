@@ -1,60 +1,54 @@
 package com.lists;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class MyLinkedListTest {
-    MyList<Integer> myList = new MyLinkedList<Integer>();
+    MyList<Integer> myList;
 
-    @Test
-    public void add() {
-        myList.add(1);
-        myList.add(2);
-        myList.add(3);
-
-        Integer firstExpectedValue = 1;
-        Integer secondExpectedValue = 2;
-        Integer thirdExpectedValue = 3;
-        int expectedSize = 3;
-
-        assertEquals(firstExpectedValue, myList.get(0));
-        assertEquals(secondExpectedValue, myList.get(1));
-        assertEquals(thirdExpectedValue, myList.get(2));
-        assertEquals(expectedSize, myList.size());
-    }
-
-    @Test
-    public void get() {
+    @Before
+    public void setMyList() {
+        myList = new MyLinkedList<>();
         myList.add(1);
         myList.add(2);
         myList.add(3);
         myList.add(4);
         myList.add(5);
         myList.add(6);
+    }
 
-        Integer expectedValue = 4;
-        assertEquals(expectedValue, myList.get(3));
+    @After
+    public void clearList() {
+        myList.clear();
+        myList = null;
+    }
+
+
+    @Test
+    public void add() {
+
+        myList.add(7);
+        Integer expectedValue = 7;
+        assertEquals(expectedValue, myList.get(6));
+    }
+
+    @Test
+    public void get() {
+        Integer expectedValue = 6;
+        assertEquals(expectedValue, myList.get(5));
     }
 
     @Test
     public void size() {
-        myList.add(1);
-        myList.add(2);
-        myList.add(3);
-        myList.add(4);
-
-        int expectedSize = 4;
+        int expectedSize = 6;
         assertEquals(expectedSize, myList.size());
     }
 
     @Test
     public void remove() {
-        myList.add(1);
-        myList.add(2);
-        myList.add(3);
-        myList.add(4);
-
         Integer expectedValue = 3;
         assertEquals(expectedValue, myList.get(2));
 
@@ -65,13 +59,6 @@ public class MyLinkedListTest {
 
     @Test
     public void clear() {
-        myList.add(1);
-        myList.add(2);
-        myList.add(3);
-        myList.add(4);
-        myList.add(5);
-        myList.add(6);
-
         myList.clear();
         int expectedSize = 0;
         assertEquals(expectedSize, myList.size());
