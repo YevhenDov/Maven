@@ -6,14 +6,10 @@
     <void method="put">
      <object class="java.util.ArrayList">
       <void method="add">
-       <object class="java.util.HashSet">
-        <void method="add">
-         <int>25</int>
-        </void>
-       </object>
+       <object class="java.util.HashSet"/>
       </void>
      </object>
-     <string>twenty five</string>
+     <string>Smth</string>
     </void>
    </object>
   </void>

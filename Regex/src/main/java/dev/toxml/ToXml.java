@@ -10,31 +10,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 public class ToXml {
-    private static final String FILE_NAME = "list.xml";
+    private static final Logger LOGGER = Logger.getLogger(ToXml.class);
+    private static final String FILE_NAME = "D:\\Program\\JavaSchool\\Mate\\Maven\\Regex\\src\\main\\resources\\list.xml";
 
     public void createMultiballStructure() {
         List<Map<List<Set<Integer>>, String>> list = new ArrayList<Map<List<Set<Integer>>, String>>();
-        int decimalInHashSet = 25;
-        Set hashSetInList = new HashSet();
-        hashSetInList.add(decimalInHashSet);
-        List listInHashMap = new ArrayList();
-        listInHashMap.add(hashSetInList);
-        Map hashMapInList = new HashMap();
-        hashMapInList.put(listInHashMap, "twenty five");
-        list.add(hashMapInList);
-
+        LOGGER.info("List has been created");
+        Integer value = 5;
+        LOGGER.info("The value were provided");
+        HashSet<Integer> hashSet = new HashSet<Integer>(value);
+        List<Set<Integer>> setList = new ArrayList<Set<Integer>>();
+        setList.add(hashSet);
+        HashMap<List<Set<Integer>>, String> listStringHashMap = new HashMap<List<Set<Integer>>, String>();
+        listStringHashMap.put(setList, "Smth");
+        list.add(listStringHashMap);
         toXml(list);
     }
 
     private void toXml(List list) {
+        XMLEncoder xmlEncoder = null;
         try {
-            XMLEncoder xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILE_NAME)));
+            xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILE_NAME)));
             xmlEncoder.writeObject(list);
             xmlEncoder.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
+
     }
 }
