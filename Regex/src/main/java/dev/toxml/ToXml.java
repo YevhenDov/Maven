@@ -10,11 +10,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 
 public class ToXml {
     private static final Logger LOGGER = Logger.getLogger(ToXml.class);
-    private static final String FILE_NAME = "D:\\Program\\JavaSchool\\Mate\\Maven\\Regex\\src\\main\\resources\\list.xml";
+    private static final String FILE_NAME = ".\\src\\main\\resources\\list.xml";
 
     public void createMultiballStructure() {
         List<Map<List<Set<Integer>>, String>> list = new ArrayList<Map<List<Set<Integer>>, String>>();
@@ -39,6 +40,5 @@ public class ToXml {
         } catch (FileNotFoundException e) {
             LOGGER.error(e);
         }
-
     }
 }
