@@ -36,9 +36,10 @@ public class ToXml {
         try {
             xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILE_NAME)));
             xmlEncoder.writeObject(list);
-            xmlEncoder.close();
         } catch (FileNotFoundException e) {
             LOGGER.error(e);
+        } finally {
+            xmlEncoder.close();
         }
     }
 }
