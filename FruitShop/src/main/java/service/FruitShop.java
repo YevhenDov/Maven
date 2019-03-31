@@ -1,6 +1,7 @@
 package service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import model.Fruit;
 import model.FruitType;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class FruitShop {
     public List<Fruit> fruits = new ArrayList<>();
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd/MM/yyyy").create();
 
     public void addFruits(String pathToJsonFile) {
         try {
@@ -28,7 +29,6 @@ public class FruitShop {
             fruits = gson.fromJson(bufferedReader, fruitsList);
         } catch (IOException e) {
         }
-        System.out.println(fruits);
     }
 
     public void save(String pathToJsonFile) {
