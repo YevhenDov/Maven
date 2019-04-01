@@ -22,10 +22,12 @@ public class FruitShop {
     public List<Fruit> fruits = new ArrayList<>();
     Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd/MM/yyyy").create();
 
+
     public void addFruits(String pathToJsonFile) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile));
-            Type fruitsList = new TypeToken<ArrayList<Fruit>>() {}.getType();
+            Type fruitsList = new TypeToken<ArrayList<Fruit>>() {
+            }.getType();
             fruits = gson.fromJson(bufferedReader, fruitsList);
         } catch (IOException e) {
         }
@@ -34,7 +36,9 @@ public class FruitShop {
     public void save(String pathToJsonFile) {
         try {
             Writer writer = new FileWriter(pathToJsonFile);
-            gson.toJson(fruits, writer);
+            String json = gson.toJson(fruits);
+            writer.write(json);
+            writer.flush();
         } catch (IOException e) {
         }
     }
@@ -64,7 +68,7 @@ public class FruitShop {
     }
 
     public List<Fruit> getAddedFruits(Date date, FruitType type) {
-        return getSpoiledFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
+        return getAddedFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
     }
 
     public List<Fruit> getAvailableFruits(Date date) {
@@ -72,7 +76,7 @@ public class FruitShop {
     }
 
     public List<Fruit> getAvailableFruits(Date date, FruitType type) {
-        return getSpoiledFruits(date).stream().filter(e -> e.getType() == type).collect(Collectors.toList());
+        return getSpoiledFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
     }
 
     public Date getSpoiledDate(Fruit fruit) {

@@ -37,7 +37,7 @@ public class Fruit {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this){
+        if (obj == this) {
             return true;
         }
 
@@ -52,3 +52,4 @@ public class Fruit {
                 && (date.equals(this.date));
     }
 }
+
