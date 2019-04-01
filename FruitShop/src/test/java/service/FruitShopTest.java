@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static junit.framework.TestCase.assertTrue;
 
 public class FruitShopTest {
     public FruitShop fruitShop;
@@ -23,41 +23,41 @@ public class FruitShopTest {
         Date date = new SimpleDateFormat("dd.MM.yyyy").parse("1.12.2019");
         Date secondDate = new SimpleDateFormat("dd.MM.yyyy").parse("2.12.2019");
 
-        fruitShop.fruits.add(new Fruit(FruitType.APPLE, 10, date, 15));
-        fruitShop.fruits.add(new Fruit(FruitType.ORANGE, 15, date, 5));
-        fruitShop.fruits.add(new Fruit(FruitType.LEMON, 5, date, 20));
-        fruitShop.fruits.add(new Fruit(FruitType.GRAPES, 20, date, 25));
-        fruitShop.fruits.add(new Fruit(FruitType.KIWI, 25, date, 40));
-        fruitShop.fruits.add(new Fruit(FruitType.PEACH, 30, date, 50));
-        fruitShop.fruits.add(new Fruit(FruitType.PLUM, 35, date, 60));
+        fruitShop.getFruits().add(new Fruit(FruitType.APPLE, 10, date, 15));
+        fruitShop.getFruits().add(new Fruit(FruitType.ORANGE, 15, date, 5));
+        fruitShop.getFruits().add(new Fruit(FruitType.LEMON, 5, date, 20));
+        fruitShop.getFruits().add(new Fruit(FruitType.GRAPES, 20, date, 25));
+        fruitShop.getFruits().add(new Fruit(FruitType.KIWI, 25, date, 40));
+        fruitShop.getFruits().add(new Fruit(FruitType.PEACH, 30, date, 50));
+        fruitShop.getFruits().add(new Fruit(FruitType.PLUM, 35, date, 60));
         fruitShop.save(PATH_TO_FIRST_JSON);
 
-        fruitShop.fruits.add(new Fruit(FruitType.KIWI, 10, secondDate, 15));
-        fruitShop.fruits.add(new Fruit(FruitType.APPLE, 15, secondDate, 5));
-        fruitShop.fruits.add(new Fruit(FruitType.LEMON, 5, secondDate, 20));
-        fruitShop.fruits.add(new Fruit(FruitType.GRAPES, 21, secondDate, 25));
-        fruitShop.fruits.add(new Fruit(FruitType.KIWI, 25, secondDate, 40));
-        fruitShop.fruits.add(new Fruit(FruitType.PEAR, 30, secondDate, 50));
-        fruitShop.fruits.add(new Fruit(FruitType.PLUM, 35, secondDate, 60));
+        fruitShop.getFruits().add(new Fruit(FruitType.KIWI, 10, secondDate, 15));
+        fruitShop.getFruits().add(new Fruit(FruitType.APPLE, 15, secondDate, 5));
+        fruitShop.getFruits().add(new Fruit(FruitType.LEMON, 5, secondDate, 20));
+        fruitShop.getFruits().add(new Fruit(FruitType.GRAPES, 21, secondDate, 25));
+        fruitShop.getFruits().add(new Fruit(FruitType.KIWI, 25, secondDate, 40));
+        fruitShop.getFruits().add(new Fruit(FruitType.PEAR, 30, secondDate, 50));
+        fruitShop.getFruits().add(new Fruit(FruitType.PLUM, 35, secondDate, 60));
         fruitShop.save(PATH_TO_SECOND_JSON);
     }
 
     @Test
     public void addFruits() {
-        fruitShop.fruits.clear();
-        assertTrue(fruitShop.fruits.size() == 0);
+        fruitShop.getFruits().clear();
+        assertTrue(fruitShop.getFruits().size() == 0);
         fruitShop.addFruits(PATH_TO_FIRST_JSON);
-        assertTrue(fruitShop.fruits.size() == 7);
+        assertTrue(fruitShop.getFruits().size() == 7);
         fruitShop.addFruits(PATH_TO_SECOND_JSON);
-        assertTrue(fruitShop.fruits.size() == 14);
+        assertTrue(fruitShop.getFruits().size() == 14);
     }
 
     @Test
     public void load() {
         fruitShop.load(PATH_TO_FIRST_JSON);
-        assertTrue(fruitShop.fruits.size() == 7);
+        assertTrue(fruitShop.getFruits().size() == 7);
         fruitShop.load(PATH_TO_SECOND_JSON);
-        assertTrue(fruitShop.fruits.size() == 14);
+        assertTrue(fruitShop.getFruits().size() == 14);
     }
 
     @Test

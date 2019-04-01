@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitShop {
-    public List<Fruit> fruits = new ArrayList<>();
+    private List<Fruit> fruits = new ArrayList<>();
     private static final Logger LOGGER = Logger.getLogger(FruitShop.class);
     Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd/MM/yyyy").create();
 
@@ -54,31 +54,42 @@ public class FruitShop {
         } catch (IOException e) {
             LOGGER.info(e.getMessage());
         }
-        System.out.println(fruits);
     }
 
     public List<Fruit> getSpoiledFruits(Date date) {
-        return fruits.stream().filter(fruit -> getSpoiledDate(fruit).before(date)).collect(Collectors.toList());
+        return fruits.stream()
+                .filter(fruit -> getSpoiledDate(fruit).before(date))
+                .collect(Collectors.toList());
     }
 
     public List<Fruit> getSpoiledFruits(Date date, FruitType type) {
-        return getSpoiledFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
+        return getSpoiledFruits(date).stream()
+                .filter(fruit -> fruit.getType() == type)
+                .collect(Collectors.toList());
     }
 
     public List<Fruit> getAddedFruits(Date date) {
-        return fruits.stream().filter(fruit -> fruit.getDate().equals(date)).collect(Collectors.toList());
+        return fruits.stream()
+                .filter(fruit -> fruit.getDate().equals(date))
+                .collect(Collectors.toList());
     }
 
     public List<Fruit> getAddedFruits(Date date, FruitType type) {
-        return getAddedFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
+        return getAddedFruits(date).stream()
+                .filter(fruit -> fruit.getType() == type)
+                .collect(Collectors.toList());
     }
 
     public List<Fruit> getAvailableFruits(Date date) {
-        return fruits.stream().filter(fruit -> getSpoiledDate(fruit).after(date)).collect(Collectors.toList());
+        return fruits.stream()
+                .filter(fruit -> getSpoiledDate(fruit).after(date))
+                .collect(Collectors.toList());
     }
 
     public List<Fruit> getAvailableFruits(Date date, FruitType type) {
-        return getSpoiledFruits(date).stream().filter(fruit -> fruit.getType() == type).collect(Collectors.toList());
+        return getSpoiledFruits(date).stream()
+                .filter(fruit -> fruit.getType() == type)
+                .collect(Collectors.toList());
     }
 
     public Date getSpoiledDate(Fruit fruit) {
@@ -86,5 +97,9 @@ public class FruitShop {
         calendar.setTime(fruit.getDate());
         calendar.add(Calendar.DAY_OF_MONTH, fruit.getShelfLife());
         return calendar.getTime();
+    }
+
+    public List<Fruit> getFruits() {
+        return fruits;
     }
 }
