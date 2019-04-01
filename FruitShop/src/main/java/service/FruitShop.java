@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import model.Fruit;
 import model.FruitType;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,37 +21,38 @@ import java.util.stream.Collectors;
 
 public class FruitShop {
     public List<Fruit> fruits = new ArrayList<>();
+    private static final Logger LOGGER = Logger.getLogger(FruitShop.class);
     Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd/MM/yyyy").create();
 
 
     public void addFruits(String pathToJsonFile) {
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile))) {
             Type fruitsList = new TypeToken<ArrayList<Fruit>>() {
             }.getType();
             fruits = gson.fromJson(bufferedReader, fruitsList);
         } catch (IOException e) {
+            LOGGER.info(e.getMessage());
         }
     }
 
     public void save(String pathToJsonFile) {
-        try {
-            Writer writer = new FileWriter(pathToJsonFile);
+        try (Writer writer = new FileWriter(pathToJsonFile)) {
             String json = gson.toJson(fruits);
             writer.write(json);
             writer.flush();
         } catch (IOException e) {
+            LOGGER.info(e.getMessage());
         }
     }
 
     public void load(String pathToJsonFile) {
         fruits.clear();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile))) {
             Type fruitsList = new TypeToken<ArrayList<Fruit>>() {
             }.getType();
             fruits = gson.fromJson(bufferedReader, fruitsList);
         } catch (IOException e) {
+            LOGGER.info(e.getMessage());
         }
         System.out.println(fruits);
     }

@@ -8,7 +8,6 @@ public class Fruit {
     private Date date;
     private double price;
 
-
     public Fruit() {
     }
 
