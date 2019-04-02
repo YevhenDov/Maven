@@ -1,0 +1,86 @@
+[
+  {
+    "type": "APPLE",
+    "shelfLife": 10,
+    "date": "01/12/2019",
+    "price": 15.0
+  },
+  {
+    "type": "ORANGE",
+    "shelfLife": 15,
+    "date": "01/12/2019",
+    "price": 5.0
+  },
+  {
+    "type": "LEMON",
+    "shelfLife": 5,
+    "date": "01/12/2019",
+    "price": 20.0
+  },
+  {
+    "type": "GRAPES",
+    "shelfLife": 20,
+    "date": "01/12/2019",
+    "price": 25.0
+  },
+  {
+    "type": "KIWI",
+    "shelfLife": 25,
+    "date": "01/12/2019",
+    "price": 40.0
+  },
+  {
+    "type": "PEACH",
+    "shelfLife": 30,
+    "date": "01/12/2019",
+    "price": 50.0
+  },
+  {
+    "type": "PLUM",
+    "shelfLife": 35,
+    "date": "01/12/2019",
+    "price": 60.0
+  },
+  {
+    "type": "KIWI",
+    "shelfLife": 10,
+    "date": "02/12/2019",
+    "price": 15.0
+  },
+  {
+    "type": "APPLE",
+    "shelfLife": 15,
+    "date": "02/12/2019",
+    "price": 5.0
+  },
+  {
+    "type": "LEMON",
+    "shelfLife": 5,
+    "date": "02/12/2019",
+    "price": 20.0
+  },
+  {
+    "type": "GRAPES",
+    "shelfLife": 21,
+    "date": "02/12/2019",
+    "price": 25.0
+  },
+  {
+    "type": "KIWI",
+    "shelfLife": 25,
+    "date": "02/12/2019",
+    "price": 40.0
+  },
+  {
+    "type": "PEAR",
+    "shelfLife": 30,
+    "date": "02/12/2019",
+    "price": 50.0
+  },
+  {
+    "type": "PLUM",
+    "shelfLife": 35,
+    "date": "02/12/2019",
+    "price": 60.0
+  }
+]
