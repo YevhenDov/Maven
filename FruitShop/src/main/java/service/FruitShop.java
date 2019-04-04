@@ -24,7 +24,6 @@ public class FruitShop {
     private static final Logger LOGGER = Logger.getLogger(FruitShop.class);
     Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd/MM/yyyy").create();
 
-
     public void addFruits(String pathToJsonFile) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile))) {
             Type fruitsList = new TypeToken<ArrayList<Fruit>>() {
@@ -47,13 +46,7 @@ public class FruitShop {
 
     public void load(String pathToJsonFile) {
         fruits.clear();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToJsonFile))) {
-            Type fruitsList = new TypeToken<ArrayList<Fruit>>() {
-            }.getType();
-            fruits = gson.fromJson(bufferedReader, fruitsList);
-        } catch (IOException e) {
-            LOGGER.info(e.getMessage());
-        }
+        addFruits(pathToJsonFile);
     }
 
     public List<Fruit> getSpoiledFruits(Date date) {
