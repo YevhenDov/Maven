@@ -1,18 +1,26 @@
 package com.model;
 
-import lombok.AllArgsConstructor;
+import com.google.api.client.util.DateTime;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
-@AllArgsConstructor
+
 public class Comment {
     private String commentAuthor;
     private String commentText;
-    private int likeCount;
-    private Date lastEditDate;
+    private long likeCount;
+    private DateTime lastEditDate;
     private boolean isEdited;
+
+    @Override
+    public String toString() {
+        return "\n Author name: " + commentAuthor +
+                "\n Text: " + commentText +
+                "\n Like count: " + likeCount +
+                "\n Last update: " + lastEditDate +
+                "\n Edited status: " + isEdited + "\n";
+    }
 }
+
