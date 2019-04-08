@@ -22,6 +22,7 @@ public class Auth {
     public static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     public static final JsonFactory JSON_FACTORY = new JacksonFactory();
     private static final String CREDENTIALS_DIRECTORY = ".oauth-credentials";
+    private static final int PORT_NUMBER = 8080;
 
     public static Credential authorize(List<String> scopes, String credentialDataStore) throws Exception {
 
@@ -36,7 +37,7 @@ public class Auth {
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, scopes).setCredentialDataStore(dataStore)
                 .build();
 
-        LocalServerReceiver localReceiver = new LocalServerReceiver.Builder().setPort(8080).build();
+        LocalServerReceiver localReceiver = new LocalServerReceiver.Builder().setPort(PORT_NUMBER).build();
 
         return new AuthorizationCodeInstalledApp(flow, localReceiver).authorize("user");
     }

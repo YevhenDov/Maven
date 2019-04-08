@@ -8,11 +8,13 @@ import com.google.api.services.youtube.model.CommentThreadListResponse;
 import com.google.common.collect.Lists;
 import com.model.Comment;
 import com.model.YouTubeVideo;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommentParser {
+    private final Logger LOGGER = Logger.getLogger(CommentParser.class);
     private YouTube youTube;
     private static List<String> scopes = Lists.newArrayList("https://www.googleapis.com/auth/youtube.force-ssl");
     private YouTubeVideo youTubeVideo = new YouTubeVideo();
@@ -22,6 +24,7 @@ public class CommentParser {
         try {
             credential = Auth.authorize(scopes, "CommentThreads");
         } catch (Exception e) {
+            LOGGER.error("Not connected");
             e.printStackTrace();
         }
         youTube = new YouTube.Builder(Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, credential)
@@ -58,9 +61,9 @@ public class CommentParser {
                 System.out.println(youTubeVideo.getCommentList());
 
             } catch (Exception e) {
+                LOGGER.error("Don't get comment list from youtube");
                 e.printStackTrace();
             }
         }
     }
 }
-
