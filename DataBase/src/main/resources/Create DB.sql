@@ -46,6 +46,15 @@ CREATE TABLE IF NOT EXISTS developers_skills
   FOREIGN KEY (skills_id) REFERENCES skills (skills_id)
 );
 
+CREATE TABLE IF NOT EXISTS developers_projects
+(
+  id           INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  developer_id INT,
+  project_id   INT,
+  FOREIGN KEY (developer_id) REFERENCES developers (developer_id),
+  FOREIGN KEY (project_id) REFERENCES projects (project_id)
+);
+
 CREATE TABLE IF NOT EXISTS companies_project
 (
   id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -117,5 +126,11 @@ VALUES (1, 1),
        (2, 2);
 
 INSERT INTO customers_project(customer_id, project_id)
-VALUES (1, 1), (1, 2),
-       (2, 1), (2, 2);
+VALUES (1, 1),
+       (1, 2),
+       (2, 1),
+       (2, 2);
+
+INSERT INTO developers_projects(developer_id, project_id)
+VALUES (1, 1), (2, 1), (3, 1),
+       (4, 2), (5, 2), (6, 2);
