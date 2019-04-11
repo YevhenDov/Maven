@@ -19,10 +19,10 @@ public class CustomerDao {
         final String REQUEST;
         REQUEST = "INSERT INTO customers(developer_name, age, gender) VALUES (" + values + ")";
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void readData() throws SQLException {
+    public List<Customer> readData() throws SQLException {
         ResultSet resultSet;
         final String REQUEST = "SELECT * FROM developers";
 
@@ -41,21 +41,22 @@ public class CustomerDao {
         } finally {
             connection.close();
         }
+        return customers;
     }
 
     public void updateData(String column, String value, String condition) {
         final String REQUEST = "UPDATE customers SET " + column + " = " + value + " WHERE " + condition;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void deleteData(String condition) {
-        final String REQUEST = "DELETE FROM customers WHERE " + condition;
+    public void deleteData(int id) {
+        final String REQUEST = "DELETE FROM customers WHERE customer_id = " + id;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    private void Execute(String request) {
+    private void execute(String request) {
         Connection connection = Connector.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(request)) {
             statement.executeUpdate();

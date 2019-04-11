@@ -18,10 +18,10 @@ public class ProjectDao {
     public void createData(String values) {
         final String REQUEST = "INSERT INTO projects(developer_name, age, gender) VALUES (" + values + ")";
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void readData() throws SQLException {
+    public List<Project> readData() throws SQLException {
         ResultSet resultSet;
         final String REQUEST = "SELECT * FROM developers";
 
@@ -41,21 +41,22 @@ public class ProjectDao {
         } finally {
             connection.close();
         }
+        return projects;
     }
 
     public void updateData(String column, String value, String condition) {
         final String REQUEST = "UPDATE projects SET " + column + " = " + value + " WHERE " + condition;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void deleteData(String condition) {
-        final String REQUEST = "DELETE FROM projects WHERE " + condition;
+    public void deleteData(int id) {
+        final String REQUEST = "DELETE FROM projects WHERE project_id = " + id;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    private void Execute(String request) {
+    private void execute(String request) {
         Connection connection = Connector.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(request)) {
             statement.executeUpdate();

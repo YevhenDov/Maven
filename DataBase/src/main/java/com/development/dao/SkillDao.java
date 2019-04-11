@@ -18,10 +18,10 @@ public class SkillDao {
     public void createData(String values) {
         final String REQUEST = "INSERT INTO skills(developer_name, age, gender) VALUES (" + values + ")";
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void readData() throws SQLException {
+    public List<Skill> readData() throws SQLException {
         ResultSet resultSet;
         final String REQUEST = "SELECT * FROM developers";
 
@@ -41,21 +41,22 @@ public class SkillDao {
         finally {
             connection.close();
         }
+        return skills;
     }
 
     public void updateData(String column, String value, String condition) {
         final String REQUEST = "UPDATE skills SET " + column + " = " + value + " WHERE " + condition;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    public void deleteData(String condition) {
-        final String REQUEST = "DELETE FROM skills WHERE " + condition;
+    public void deleteData(int id) {
+        final String REQUEST = "DELETE FROM skills WHERE skill_id = " + id;
 
-        Execute(REQUEST);
+        execute(REQUEST);
     }
 
-    private void Execute(String request) {
+    private void execute(String request) {
         Connection connection = Connector.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(request)) {
             statement.executeUpdate();
