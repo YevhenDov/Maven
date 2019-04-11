@@ -1,7 +1,6 @@
 package com.development.dao;
 
 import com.development.model.Company;
-import com.development.service.CRUD;
 import com.development.service.Connector;
 import org.apache.log4j.Logger;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyDao {
-    private static final Logger LOGGER = Logger.getLogger(CRUD.class);
+    private static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
     private List<Company> companies = new ArrayList<>();
 
     public void createData(String values) {

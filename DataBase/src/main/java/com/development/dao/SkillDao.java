@@ -1,7 +1,6 @@
 package com.development.dao;
 
 import com.development.model.Skill;
-import com.development.service.CRUD;
 import com.development.service.Connector;
 import org.apache.log4j.Logger;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillDao {
-    private static final Logger LOGGER = Logger.getLogger(CRUD.class);
+    private static final Logger LOGGER = Logger.getLogger(SkillDao.class);
     private List<Skill> skills = new ArrayList<>();
 
     public void createData(String values) {
