@@ -22,7 +22,7 @@ public class CustomerDao {
         Execute(REQUEST);
     }
 
-    public void readData() {
+    public void readData() throws SQLException {
         ResultSet resultSet;
         final String REQUEST = "SELECT * FROM developers";
 
@@ -35,10 +35,11 @@ public class CustomerDao {
                         resultSet.getString(2),
                         resultSet.getString(3)
                 ));
-                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 

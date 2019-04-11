@@ -16,19 +16,18 @@ public class DeveloperDao {
     private List<Developer> developers = new ArrayList<>();
 
     public void createData(String values) {
-        String request;
-        request = "INSERT INTO developers(developer_name, age, gender) VALUES (" + values + ")";
+        final String REQUEST = "INSERT INTO developers(developer_name, age, gender) VALUES (" + values + ")";
 
-        Execute(request);
+        Execute(REQUEST);
     }
 
-    public void readData() {
+    public void readData() throws SQLException {
         ResultSet resultSet;
-        String request = "SELECT * FROM developers";
+        final String REQUEST = "SELECT * FROM developers";
 
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(request)) {
-            resultSet = statement.executeQuery(request);
+        try (PreparedStatement statement = connection.prepareStatement(REQUEST)) {
+            resultSet = statement.executeQuery(REQUEST);
             while (resultSet.next()) {
                 developers.add(new Developer(
                         resultSet.getInt(1),
@@ -38,22 +37,23 @@ public class DeveloperDao {
                         resultSet.getInt(5)
                 ));
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
     public void updateData(String column, String value, String condition) {
-        String request = "UPDATE developers SET " + column + " = " + value + " WHERE " + condition;
+        final String REQUEST = "UPDATE developers SET " + column + " = " + value + " WHERE " + condition;
 
-        Execute(request);
+        Execute(REQUEST);
     }
 
     public void deleteData(String condition) {
-        String request = "DELETE FROM developers WHERE " + condition;
+        final String REQUEST = "DELETE FROM developers WHERE " + condition;
 
-        Execute(request);
+        Execute(REQUEST);
     }
 
     private void Execute(String request) {
