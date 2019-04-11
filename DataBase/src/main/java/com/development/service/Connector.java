@@ -1,4 +1,4 @@
-package com.development;
+package com.development.service;
 
 import org.apache.log4j.Logger;
 
@@ -11,7 +11,7 @@ public class Connector {
 
     private static final String USER = "root";
     private static final String PASS = "root";
-    private static final String URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Europe/Kiev&useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/developers_base?serverTimezone=Europe/Kiev&useSSL=false";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public static Connection getConnection() {
@@ -25,4 +25,3 @@ public class Connector {
         return null;
     }
 }
-
