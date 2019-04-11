@@ -15,8 +15,11 @@ public class SkillDao {
     private static final Logger LOGGER = Logger.getLogger(SkillDao.class);
     private List<Skill> skills = new ArrayList<>();
 
-    public void createData(String values) {
-        final String REQUEST = "INSERT INTO skills(developer_name, age, gender) VALUES (" + values + ")";
+    public void createData(Skill skill, String values) {
+        final String REQUEST = "INSERT INTO skills("
+                + skill.getId() + ","
+                + skill.getSkill() + ","
+                + skill.getSkillLvl() + ") VALUES (" + values + ")";
 
         execute(REQUEST);
     }

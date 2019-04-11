@@ -15,8 +15,13 @@ public class DeveloperDao {
     private static final Logger LOGGER = Logger.getLogger(Developer.class);
     private List<Developer> developers = new ArrayList<>();
 
-    public void createData(String values) {
-        final String REQUEST = "INSERT INTO developers(developer_name, age, gender) VALUES (" + values + ")";
+    public void createData(Developer developer, String values) {
+        final String REQUEST = "INSERT INTO developers("
+                + developer.getId() + ","
+                + developer.getName() + ","
+                + developer.getAge() + ","
+                + developer.getGender() + ","
+                + developer.getSalary() + ") VALUES (" + values + ")";
 
         execute(REQUEST);
     }

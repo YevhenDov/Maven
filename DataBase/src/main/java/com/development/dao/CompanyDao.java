@@ -15,8 +15,11 @@ public class CompanyDao {
     private static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
     private List<Company> companies = new ArrayList<>();
 
-    public void createData(String values) {
-        final String REQUEST ="INSERT INTO companies(developer_name, age, gender) VALUES (" + values + ")";
+    public void createData(Company company, String values) {
+        final String REQUEST ="INSERT INTO companies("
+                + company.getId() + ","
+                + company.getName() + ","
+                + company.getAddress() + ") VALUES (" + values + ")";
 
         execute(REQUEST);
     }

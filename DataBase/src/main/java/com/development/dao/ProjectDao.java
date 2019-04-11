@@ -15,8 +15,12 @@ public class ProjectDao {
     private static final Logger LOGGER = Logger.getLogger(ProjectDao.class);
     private List<Project> projects = new ArrayList<>();
 
-    public void createData(String values) {
-        final String REQUEST = "INSERT INTO projects(developer_name, age, gender) VALUES (" + values + ")";
+    public void createData(Project project, String values) {
+        final String REQUEST = "INSERT INTO projects("
+                + project.getId() + ","
+                + project.getName() + ","
+                + project.getDeadLine() + ","
+                + project.getCost() + ") VALUES (" + values + ")";
 
         execute(REQUEST);
     }

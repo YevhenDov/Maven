@@ -15,9 +15,12 @@ public class CustomerDao {
     private static final Logger LOGGER = Logger.getLogger(Customer.class);
     private List<Customer> customers = new ArrayList<>();
 
-    public void createData(String values) {
+    public void createData(Customer customer, String values) {
         final String REQUEST;
-        REQUEST = "INSERT INTO customers(developer_name, age, gender) VALUES (" + values + ")";
+        REQUEST = "INSERT INTO customers("
+                + customer.getId() + ","
+                + customer.getName() + ","
+                + customer.getLocation() + ") VALUES (" + values + ")";
 
         execute(REQUEST);
     }
