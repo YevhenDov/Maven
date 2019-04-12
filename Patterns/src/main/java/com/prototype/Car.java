@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Car implements Copyable{
+public class Car implements Copyable {
     private int id;
     private String model;
     private String bodyType;

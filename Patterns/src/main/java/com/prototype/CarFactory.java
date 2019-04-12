@@ -8,7 +8,7 @@ import lombok.Getter;
 public class CarFactory {
     Car car;
 
-    Car copyCar(){
+    Car copyCar() {
         return (Car) car.copy();
     }
 }

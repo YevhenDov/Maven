@@ -6,19 +6,17 @@ import java.util.Map;
 public class DeveloperFactory {
     private static final Map<String, Developer> developers = new HashMap<>();
 
-    public Developer getDeveloper(String specialty){
+    public Developer getDeveloper(String specialty) {
         Developer developer = developers.get(specialty);
 
-        if (developer == null){
-            switch (specialty){
-                case "Java":
-                {
+        if (developer == null) {
+            switch (specialty) {
+                case "Java": {
                     developer = new JavaDeveloper();
                     System.out.println("Hiring Java developer...");
                     break;
                 }
-                case "C++":
-                {
+                case "C++": {
                     developer = new CppDeveloper();
                     System.out.println("Hiring C++ developer...");
                     break;

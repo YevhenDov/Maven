@@ -1,7 +1,7 @@
 package com.adapter;
 
 public class Volvo {
-    public void volvoMove(){
+    public void volvoMove() {
         System.out.println("Volvo move...");
     }
 }

@@ -9,7 +9,7 @@ public class ProxyCarRenault implements Car {
     }
 
     public void buildCar() {
-        if (carRenault == null){
+        if (carRenault == null) {
             carRenault = new CarRenault(isOn);
         }
         carRenault.buildCar();
