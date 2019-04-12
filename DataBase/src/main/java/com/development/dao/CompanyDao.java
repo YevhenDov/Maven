@@ -15,22 +15,32 @@ public class CompanyDao {
     private static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
     private List<Company> companies = new ArrayList<>();
 
-    public void createData(Company company, String values) {
-        final String REQUEST ="INSERT INTO companies("
-                + company.getId() + ","
-                + company.getName() + ","
-                + company.getAddress() + ") VALUES (" + values + ")";
+    private final String CREATE_REQUEST = "INSERT INTO companies(company_name, address) VALUES (?, ?)";
+    private final String READ_REQUEST = "SELECT * FROM companies_project";
+    private final String UPDATE_REQUEST = "UPDATE companies SET company_name = 'Google' WHERE company_name = ?";
+    private final String DELETE_REQUEST = "DELETE FROM companies WHERE company_name = ?";
 
-        execute(REQUEST);
+    public void createData(Company company) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(CREATE_REQUEST);
+            preparedStatement.setString(1, company.getName());
+            preparedStatement.setString(2, company.getAddress());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
     }
 
     public List<Company> readData() throws SQLException {
         ResultSet resultSet;
-        final String REQUEST = "SELECT * FROM developers";
 
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(REQUEST)) {
-            resultSet = statement.executeQuery(REQUEST);
+        try (PreparedStatement statement = connection.prepareStatement(READ_REQUEST)) {
+            resultSet = statement.executeQuery(READ_REQUEST);
             while (resultSet.next()) {
                 companies.add(new Company(
                         resultSet.getInt(1),
@@ -40,31 +50,37 @@ public class CompanyDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        }
+        finally {
             connection.close();
         }
         return companies;
     }
 
-    public void updateData(String column, String value, String condition) {
-        final String REQUEST = "UPDATE companies SET " + column + " = " + value + " WHERE " + condition;
-
-        execute(REQUEST);
-    }
-
-    public void deleteData(int id) {
-        final String REQUEST = "DELETE FROM companies WHERE company_id = " + id;
-
-        execute(REQUEST);
-    }
-
-    private void execute(String request) {
+    public void updateData(Company company) throws SQLException {
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(request)) {
-            statement.executeUpdate();
-            connection.close();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(UPDATE_REQUEST);
+            preparedStatement.setString(1, company.getName());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+    public void deleteData(Company company) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(DELETE_REQUEST);
+            preparedStatement.setString(1, company.getName());
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
         }
     }
 }

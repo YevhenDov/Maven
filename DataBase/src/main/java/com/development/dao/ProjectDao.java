@@ -12,26 +12,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDao {
-    private static final Logger LOGGER = Logger.getLogger(ProjectDao.class);
+    private static final Logger LOGGER = Logger.getLogger(SkillDao.class);
     private List<Project> projects = new ArrayList<>();
 
-    public void createData(Project project, String values) {
-        final String REQUEST = "INSERT INTO projects("
-                + project.getId() + ","
-                + project.getName() + ","
-                + project.getDeadLine() + ","
-                + project.getCost() + ") VALUES (" + values + ")";
+    private final String CREATE_REQUEST = "INSERT INTO projects(project_name, dead_line, cost ) VALUES (?, ?, ?)";
+    private final String READ_REQUEST = "SELECT * FROM projects";
+    private final String UPDATE_REQUEST = "UPDATE projects SET cost = 20000 WHERE project_name = ?";
+    private final String DELETE_REQUEST = "DELETE FROM projects WHERE project_name = ?";
 
-        execute(REQUEST);
+    public void createData(Project project) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(CREATE_REQUEST);
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.setString(2, project.getDeadLine());
+            preparedStatement.setString(3, project.getCost());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
     }
 
     public List<Project> readData() throws SQLException {
         ResultSet resultSet;
-        final String REQUEST = "SELECT * FROM developers";
 
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(REQUEST)) {
-            resultSet = statement.executeQuery(REQUEST);
+        try (PreparedStatement statement = connection.prepareStatement(READ_REQUEST)) {
+            resultSet = statement.executeQuery(READ_REQUEST);
             while (resultSet.next()) {
                 projects.add(new Project(
                         resultSet.getInt(1),
@@ -42,31 +52,37 @@ public class ProjectDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             connection.close();
         }
         return projects;
     }
 
-    public void updateData(String column, String value, String condition) {
-        final String REQUEST = "UPDATE projects SET " + column + " = " + value + " WHERE " + condition;
-
-        execute(REQUEST);
-    }
-
-    public void deleteData(int id) {
-        final String REQUEST = "DELETE FROM projects WHERE project_id = " + id;
-
-        execute(REQUEST);
-    }
-
-    private void execute(String request) {
+    public void updateData(Project project) throws SQLException {
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(request)) {
-            statement.executeUpdate();
-            connection.close();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(UPDATE_REQUEST);
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+    public void deleteData(Project project) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(DELETE_REQUEST);
+            preparedStatement.setString(1, project.getName());
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
         }
     }
 }

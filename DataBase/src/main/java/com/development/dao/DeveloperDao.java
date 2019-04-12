@@ -15,24 +15,34 @@ public class DeveloperDao {
     private static final Logger LOGGER = Logger.getLogger(Developer.class);
     private List<Developer> developers = new ArrayList<>();
 
-    public void createData(Developer developer, String values) {
-        final String REQUEST = "INSERT INTO developers("
-                + developer.getId() + ","
-                + developer.getName() + ","
-                + developer.getAge() + ","
-                + developer.getGender() + ","
-                + developer.getSalary() + ") VALUES (" + values + ")";
+    private final String CREATE_REQUEST = "INSERT INTO developers(developer_name, age, gender, salary) VALUES (?, ?, ?, ?)";
+    private final String READ_REQUEST = "SELECT * FROM developers";
+    private final String UPDATE_REQUEST = "UPDATE developers SET salary = 2000 WHERE age = ?";
+    private final String DELETE_REQUEST = "DELETE FROM developers WHERE developer_name = ?";
 
-        execute(REQUEST);
+    public void createData(Developer developer) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(CREATE_REQUEST);
+            preparedStatement.setString(1, developer.getName());
+            preparedStatement.setString(2, developer.getAge());
+            preparedStatement.setString(3, developer.getGender());
+            preparedStatement.setInt(4, developer.getSalary());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
     }
 
     public List<Developer> readData() throws SQLException {
         ResultSet resultSet;
-        final String REQUEST = "SELECT * FROM developers";
 
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(REQUEST)) {
-            resultSet = statement.executeQuery(REQUEST);
+        try (PreparedStatement statement = connection.prepareStatement(READ_REQUEST)) {
+            resultSet = statement.executeQuery(READ_REQUEST);
             while (resultSet.next()) {
                 developers.add(new Developer(
                         resultSet.getInt(1),
@@ -44,31 +54,37 @@ public class DeveloperDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             connection.close();
         }
         return developers;
     }
 
-    public void updateData(String column, String value, String condition) {
-        final String REQUEST = "UPDATE developers SET " + column + " = " + value + " WHERE " + condition;
-
-        execute(REQUEST);
-    }
-
-    public void deleteData(int id) {
-        final String REQUEST = "DELETE FROM developers WHERE developer_id = " + id;
-
-        execute(REQUEST);
-    }
-
-    private void execute(String request) {
+    public void updateData(Developer developer) throws SQLException {
         Connection connection = Connector.getConnection();
-        try (PreparedStatement statement = connection.prepareStatement(request)) {
-            statement.executeUpdate();
-            connection.close();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(UPDATE_REQUEST);
+            preparedStatement.setString(1, developer.getAge());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+    public void deleteData(Developer developer) throws SQLException {
+        Connection connection = Connector.getConnection();
+        PreparedStatement preparedStatement = null;
+        try  {
+            preparedStatement = connection.prepareStatement(DELETE_REQUEST);
+            preparedStatement.setString(1, developer.getName());
+        } catch (SQLException e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            connection.close();
         }
     }
 }
