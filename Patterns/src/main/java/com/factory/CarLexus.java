@@ -24,7 +24,6 @@ public class CarLexus implements Car {
         public CarLexus build() {
             return carLexus;
         }
-
     }
 
     @Override
