@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeveloperFactory {
-    private final String JAVA_DEVELOPER = "Java";
-    private final String CPP_DEVELOPER = "C++";
+    private static final String JAVA_DEVELOPER = "Java";
+    private static final String CPP_DEVELOPER = "C++";
     private static final Map<String, Developer> developers = new HashMap<>();
 
     public Developer getDeveloper(String specialty) {
