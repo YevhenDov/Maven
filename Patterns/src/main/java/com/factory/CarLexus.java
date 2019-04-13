@@ -1,8 +1,8 @@
 package com.factory;
 
 public class CarLexus implements Car {
-    String engineType;
-    String bodyType;
+    private String engineType;
+    private String bodyType;
 
     public static class Builder {
         private CarLexus carLexus;

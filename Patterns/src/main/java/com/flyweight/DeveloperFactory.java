@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeveloperFactory {
+    private final String JAVA_DEVELOPER = "Java";
+    private final String CPP_DEVELOPER = "C++";
     private static final Map<String, Developer> developers = new HashMap<>();
 
     public Developer getDeveloper(String specialty) {
@@ -11,12 +13,12 @@ public class DeveloperFactory {
 
         if (developer == null) {
             switch (specialty) {
-                case "Java": {
+                case JAVA_DEVELOPER: {
                     developer = new JavaDeveloper();
                     System.out.println("Hiring Java developer...");
                     break;
                 }
-                case "C++": {
+                case CPP_DEVELOPER: {
                     developer = new CppDeveloper();
                     System.out.println("Hiring C++ developer...");
                     break;

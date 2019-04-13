@@ -2,9 +2,11 @@ package com.prototype;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
+@ToString
 public class Car implements Cloneable {
     private int id;
     private String model;
@@ -12,17 +14,8 @@ public class Car implements Cloneable {
 
 
     @Override
-    public Object clone() {
+    public Car clone() {
         Car clone = new Car(id, model, bodyType);
         return clone;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", bodyType='" + bodyType + '\'' +
-                '}';
     }
 }
