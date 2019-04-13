@@ -5,16 +5,16 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Car implements Copyable {
+public class Car implements Cloneable {
     private int id;
     private String model;
     private String bodyType;
 
 
     @Override
-    public Object copy() {
-        Car copy = new Car(id, model, bodyType);
-        return copy;
+    public Object clone() {
+        Car clone = new Car(id, model, bodyType);
+        return clone;
     }
 
     @Override

@@ -8,6 +8,7 @@ public class ProxyCarRenault implements Car {
         this.isOn = turnOn;
     }
 
+    @Override
     public void buildCar() {
         if (carRenault == null) {
             carRenault = new CarRenault(isOn);

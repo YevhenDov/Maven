@@ -27,6 +27,7 @@ public class CarLexus implements Car {
 
     }
 
+    @Override
     public void buildCar() {
         System.out.println("Car Lexus is building...");
     }

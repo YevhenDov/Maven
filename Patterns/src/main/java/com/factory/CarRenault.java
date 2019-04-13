@@ -8,10 +8,11 @@ public class CarRenault implements Car {
         conveyorOn();
     }
 
-    public void conveyorOn() {
+    private void conveyorOn() {
         System.out.println("Conveyor is on...");
     }
 
+    @Override
     public void buildCar() {
         System.out.println("Car Renault is building...");
     }
