@@ -1,4 +1,4 @@
-package com.connect;
+package com.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
