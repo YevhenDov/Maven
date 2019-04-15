@@ -1,6 +1,6 @@
 package com.service;
 
-import com.connect.HibernateUtil;
+import com.util.HibernateUtil;
 import com.dao.DeveloperDAO;
 import com.entity.Developer;
 import org.hibernate.Session;
