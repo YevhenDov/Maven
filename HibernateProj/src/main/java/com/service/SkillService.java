@@ -15,7 +15,6 @@ public class SkillService implements SkillDAO {
         entityManager.getTransaction().begin();
         Skill skill = entityManager.find(Skill.class, id);
         entityManager.getTransaction().commit();
-        entityManager.close();
         return skill;
     }
 
@@ -23,21 +22,17 @@ public class SkillService implements SkillDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(skill);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void update(Skill skill){
         entityManager.getTransaction().begin();
         entityManager.merge(skill);
         entityManager.getTransaction().commit();
-        entityManager.close();
-
     }
 
     public void delete(Skill skill){
         entityManager.getTransaction().begin();
         entityManager.remove(skill);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }

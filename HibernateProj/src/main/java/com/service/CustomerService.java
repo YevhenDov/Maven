@@ -16,7 +16,6 @@ public class CustomerService implements CustomerDAO {
         entityManager.getTransaction().begin();
         Customer customer = entityManager.find(Customer.class, id);
         entityManager.getTransaction().commit();
-        entityManager.close();
         return customer;
     }
 
@@ -24,21 +23,17 @@ public class CustomerService implements CustomerDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(customer);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void update(Customer customer){
         entityManager.getTransaction().begin();
         entityManager.merge(customer);
         entityManager.getTransaction().commit();
-        entityManager.close();
-
     }
 
     public void delete(Customer customer){
         entityManager.getTransaction().begin();
         entityManager.remove(customer);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }

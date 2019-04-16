@@ -15,7 +15,6 @@ public class CompanyService implements CompanyDAO {
         entityManager.getTransaction().begin();
         Company company = entityManager.find(Company.class, id);
         entityManager.getTransaction().commit();
-        entityManager.close();
         return company;
     }
 
@@ -23,21 +22,17 @@ public class CompanyService implements CompanyDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(company);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void update(Company company){
         entityManager.getTransaction().begin();
         entityManager.merge(company);
         entityManager.getTransaction().commit();
-        entityManager.close();
-
     }
 
     public void delete(Company company){
         entityManager.getTransaction().begin();
         entityManager.remove(company);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }

@@ -15,7 +15,6 @@ public class ProjectService implements ProjectDAO {
         entityManager.getTransaction().begin();
         Project project = entityManager.find(Project.class, id);
         entityManager.getTransaction().commit();
-        entityManager.close();
         return project;
     }
 
@@ -23,20 +22,17 @@ public class ProjectService implements ProjectDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(project);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void update(Project project){
         entityManager.getTransaction().begin();
         entityManager.merge(project);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void delete(Project project){
         entityManager.getTransaction().begin();
         entityManager.remove(project);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }

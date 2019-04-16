@@ -15,7 +15,6 @@ public class DeveloperService implements DeveloperDAO {
         entityManager.getTransaction().begin();
         Developer developer = entityManager.find(Developer.class, id);
         entityManager.getTransaction().commit();
-        entityManager.close();
         return developer;
     }
 
@@ -23,21 +22,17 @@ public class DeveloperService implements DeveloperDAO {
         entityManager.getTransaction().begin();
         entityManager.persist(developer);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public void update(Developer developer){
         entityManager.getTransaction().begin();
         entityManager.merge(developer);
         entityManager.getTransaction().commit();
-        entityManager.close();
-
     }
 
     public void delete(Developer developer){
         entityManager.getTransaction().begin();
         entityManager.remove(developer);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
 }
