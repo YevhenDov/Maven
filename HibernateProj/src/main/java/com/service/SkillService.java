@@ -1,39 +1,43 @@
 package com.service;
 
-import com.util.HibernateUtil;
 import com.dao.SkillDAO;
 import com.entity.Skill;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class SkillService implements SkillDAO {
-    public Skill findById(int id){
-        return HibernateUtil.getSessionFactory().openSession().get(Skill.class, id);
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    public Skill read(int id){
+        entityManager.getTransaction().begin();
+        Skill skill = entityManager.find(Skill.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return skill;
     }
 
-    public void save(Skill skill){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(skill);
-        transaction.commit();
-        session.close();
+    public void create(Skill skill){
+        entityManager.getTransaction().begin();
+        entityManager.persist(skill);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(Skill skill){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(skill);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(skill);
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
     public void delete(Skill skill){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(skill);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(skill);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
-
 }

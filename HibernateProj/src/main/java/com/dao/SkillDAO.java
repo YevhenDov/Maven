@@ -3,9 +3,9 @@ package com.dao;
 import com.entity.Skill;
 
 public interface SkillDAO {
-    Skill findById(int id);
+    Skill read(int id);
 
-    void save(Skill skill);
+    void create(Skill skill);
 
     void update(Skill skill);
 

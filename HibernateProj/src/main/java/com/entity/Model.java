@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-abstract class Model {
+public abstract class Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

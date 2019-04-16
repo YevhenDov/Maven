@@ -1,38 +1,43 @@
 package com.service;
 
-import com.util.HibernateUtil;
 import com.dao.DeveloperDAO;
 import com.entity.Developer;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class DeveloperService implements DeveloperDAO {
-    public Developer findById(int id){
-        return HibernateUtil.getSessionFactory().openSession().get(Developer.class, id);
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    public Developer read(int id){
+        entityManager.getTransaction().begin();
+        Developer developer = entityManager.find(Developer.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return developer;
     }
 
-    public void save(Developer developer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(developer);
-        transaction.commit();
-        session.close();
+    public void create(Developer developer){
+        entityManager.getTransaction().begin();
+        entityManager.persist(developer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(Developer developer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(developer);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(developer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
     public void delete(Developer developer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(developer);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(developer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

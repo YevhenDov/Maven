@@ -3,9 +3,9 @@ package com.dao;
 import com.entity.Developer;
 
 public interface DeveloperDAO {
-    Developer findById(int id);
+    Developer read(int id);
 
-    void save(Developer developer);
+    void create(Developer developer);
 
     void update(Developer developer);
 

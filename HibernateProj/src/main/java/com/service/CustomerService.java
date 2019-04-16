@@ -1,38 +1,44 @@
 package com.service;
 
-import com.util.HibernateUtil;
+import com.dao.CustomerDAO;
 import com.entity.Customer;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
-public class CustomerService {
-    public Customer findById(int id){
-        return HibernateUtil.getSessionFactory().openSession().get(Customer.class, id);
+public class CustomerService implements CustomerDAO {
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    public Customer read(int id){
+        entityManager.getTransaction().begin();
+        Customer customer = entityManager.find(Customer.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return customer;
     }
 
-    public void save(Customer customer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(customer);
-        transaction.commit();
-        session.close();
+    public void create(Customer customer){
+        entityManager.getTransaction().begin();
+        entityManager.persist(customer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(Customer customer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(customer);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(customer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
     public void delete(Customer customer){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(customer);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(customer);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

@@ -1,38 +1,43 @@
 package com.service;
 
-import com.util.HibernateUtil;
 import com.dao.CompanyDAO;
 import com.entity.Company;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class CompanyService implements CompanyDAO {
-    public Company findById(int id){
-        return HibernateUtil.getSessionFactory().openSession().get(Company.class, id);
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    public Company read(int id){
+        entityManager.getTransaction().begin();
+        Company company = entityManager.find(Company.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return company;
     }
 
-    public void save(Company company){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(company);
-        transaction.commit();
-        session.close();
+    public void create(Company company){
+        entityManager.getTransaction().begin();
+        entityManager.persist(company);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(Company company){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(company);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.merge(company);
+        entityManager.getTransaction().commit();
+        entityManager.close();
 
     }
 
     public void delete(Company company){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(company);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(company);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

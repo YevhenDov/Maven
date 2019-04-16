@@ -3,9 +3,10 @@ package com.dao;
 import com.entity.Company;
 
 public interface CompanyDAO {
-    Company findById(int id);
 
-    void save(Company company);
+    void create(Company company);
+
+    Company read(int id);
 
     void update(Company company);
 

@@ -1,38 +1,42 @@
 package com.service;
 
-import com.util.HibernateUtil;
 import com.dao.ProjectDAO;
 import com.entity.Project;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ProjectService implements ProjectDAO {
-    public Project findById(int id){
-        return HibernateUtil.getSessionFactory().openSession().get(Project.class, id);
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    public Project read(int id){
+        entityManager.getTransaction().begin();
+        Project project = entityManager.find(Project.class, id);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return project;
     }
 
-    public void save(Project project){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(project);
-        transaction.commit();
-        session.close();
+    public void create(Project project){
+        entityManager.getTransaction().begin();
+        entityManager.persist(project);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void update(Project project){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(project);
-        transaction.commit();
-        session.close();
-
+        entityManager.getTransaction().begin();
+        entityManager.merge(project);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public void delete(Project project){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(project);
-        transaction.commit();
-        session.close();
+        entityManager.getTransaction().begin();
+        entityManager.remove(project);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

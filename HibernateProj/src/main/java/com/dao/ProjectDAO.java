@@ -3,9 +3,9 @@ package com.dao;
 import com.entity.Project;
 
 public interface ProjectDAO {
-    Project findById(int id);
+    Project read(int id);
 
-    void save(Project project);
+    void create(Project project);
 
     void update(Project project);
 
