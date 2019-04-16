@@ -22,11 +22,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "skills")
-public class Skill {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Skill extends Model {
 
     @Column(name = "skill_name")
     private String skillName;

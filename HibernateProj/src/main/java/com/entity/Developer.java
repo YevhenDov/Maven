@@ -26,11 +26,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "developers")
-public class Developer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Developer extends Model {
 
     @Column(name = "developer_name")
     private String name;
