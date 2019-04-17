@@ -1,10 +1,8 @@
 package com.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import lombok.extern.log4j.Log4j;
 
 import javax.persistence.CascadeType;
@@ -26,11 +24,9 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Log4j
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "customers")
 public class Customer extends Model {
