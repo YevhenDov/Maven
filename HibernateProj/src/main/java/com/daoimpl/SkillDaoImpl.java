@@ -11,28 +11,45 @@ public class SkillDaoImpl implements SkillDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Skill findById(int id){
-        entityManager.getTransaction().begin();
-        Skill skill = entityManager.find(Skill.class, id);
-        entityManager.getTransaction().commit();
-        return skill;
+    public Skill findById(int id) {
+        try {
+            entityManager.getTransaction().begin();
+            Skill skill = entityManager.find(Skill.class, id);
+            entityManager.getTransaction().commit();
+            return skill;
+        } catch (RuntimeException e) {
+            entityManager.getTransaction().rollback();
+        }
+        return null;
     }
 
-    public void create(Skill skill){
-        entityManager.getTransaction().begin();
-        entityManager.persist(skill);
-        entityManager.getTransaction().commit();
+    public void create(Skill skill) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(skill);
+            entityManager.getTransaction().commit();
+        } catch (RuntimeException e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
-    public void update(Skill skill){
-        entityManager.getTransaction().begin();
-        entityManager.merge(skill);
-        entityManager.getTransaction().commit();
+    public void update(Skill skill) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(skill);
+            entityManager.getTransaction().commit();
+        } catch (RuntimeException e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 
-    public void delete(Skill skill){
-        entityManager.getTransaction().begin();
-        entityManager.remove(skill);
-        entityManager.getTransaction().commit();
+    public void delete(Skill skill) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.remove(skill);
+            entityManager.getTransaction().commit();
+        } catch (RuntimeException e) {
+            entityManager.getTransaction().rollback();
+        }
     }
 }
