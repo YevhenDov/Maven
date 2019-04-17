@@ -57,7 +57,7 @@ public class Skill extends Model {
 
     @PostLoad
     void postLoad() {
-        log.info("Skill " + getSkillName() + " is read at " + getNowTime());
+        log.info("Skill " + getSkillName() + " is findById at " + getNowTime());
     }
 
     @PreUpdate

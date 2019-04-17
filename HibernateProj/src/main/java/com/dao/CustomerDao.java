@@ -2,8 +2,8 @@ package com.dao;
 
 import com.entity.Customer;
 
-public interface CustomerDAO {
-    Customer read(int id);
+public interface CustomerDao {
+    Customer findById(int id);
 
     void create(Customer customer);
 

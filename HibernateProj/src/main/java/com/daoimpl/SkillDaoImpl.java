@@ -1,4 +1,4 @@
-package com.service;
+package com.daoimpl;
 
 import com.dao.SkillDAO;
 import com.entity.Skill;
@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class SkillService implements SkillDAO {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public class SkillDaoImpl implements SkillDAO {
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Skill read(int id){
+    public Skill findById(int id){
         entityManager.getTransaction().begin();
         Skill skill = entityManager.find(Skill.class, id);
         entityManager.getTransaction().commit();

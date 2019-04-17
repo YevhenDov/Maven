@@ -1,17 +1,17 @@
-package com.service;
+package com.daoimpl;
 
-import com.dao.CompanyDAO;
+import com.dao.CompanyDao;
 import com.entity.Company;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class CompanyService implements CompanyDAO {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public class CompanyDaoImpl implements CompanyDao {
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Company read(int id){
+    public Company findById(int id){
         entityManager.getTransaction().begin();
         Company company = entityManager.find(Company.class, id);
         entityManager.getTransaction().commit();

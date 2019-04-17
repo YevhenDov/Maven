@@ -1,17 +1,17 @@
-package com.service;
+package com.daoimpl;
 
-import com.dao.DeveloperDAO;
+import com.dao.DeveloperDao;
 import com.entity.Developer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DeveloperService implements DeveloperDAO {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public class DeveloperDaoImpl implements DeveloperDao {
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Developer read(int id){
+    public Developer findById(int id){
         entityManager.getTransaction().begin();
         Developer developer = entityManager.find(Developer.class, id);
         entityManager.getTransaction().commit();

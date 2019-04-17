@@ -66,7 +66,7 @@ public class Customer extends Model {
 
     @PostLoad
     void postLoad() {
-        log.info("Customer " + getName() + " is read at " + getNowTime());
+        log.info("Customer " + getName() + " is findById at " + getNowTime());
     }
 
     @PreUpdate

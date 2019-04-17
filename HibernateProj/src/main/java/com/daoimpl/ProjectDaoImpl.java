@@ -1,17 +1,17 @@
-package com.service;
+package com.daoimpl;
 
-import com.dao.ProjectDAO;
+import com.dao.ProjectDao;
 import com.entity.Project;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ProjectService implements ProjectDAO {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public class ProjectDaoImpl implements ProjectDao {
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Project read(int id){
+    public Project findById(int id){
         entityManager.getTransaction().begin();
         Project project = entityManager.find(Project.class, id);
         entityManager.getTransaction().commit();

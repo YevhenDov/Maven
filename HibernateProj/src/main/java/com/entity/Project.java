@@ -66,7 +66,7 @@ public class Project extends Model {
 
     @PostLoad
     void postLoad() {
-        log.info("Project " + getName() + " is read at " + getNowTime());
+        log.info("Project " + getName() + " is findById at " + getNowTime());
     }
 
     @PreUpdate

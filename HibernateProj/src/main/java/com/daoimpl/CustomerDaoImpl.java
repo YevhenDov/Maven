@@ -1,6 +1,6 @@
-package com.service;
+package com.daoimpl;
 
-import com.dao.CustomerDAO;
+import com.dao.CustomerDao;
 import com.entity.Customer;
 
 import javax.persistence.EntityManager;
@@ -8,11 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-public class CustomerService implements CustomerDAO {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public class CustomerDaoImpl implements CustomerDao {
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Customer read(int id){
+    public Customer findById(int id){
         entityManager.getTransaction().begin();
         Customer customer = entityManager.find(Customer.class, id);
         entityManager.getTransaction().commit();

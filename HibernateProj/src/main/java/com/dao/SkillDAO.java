@@ -3,7 +3,7 @@ package com.dao;
 import com.entity.Skill;
 
 public interface SkillDAO {
-    Skill read(int id);
+    Skill findById(int id);
 
     void create(Skill skill);
 

@@ -2,8 +2,8 @@ package com.dao;
 
 import com.entity.Developer;
 
-public interface DeveloperDAO {
-    Developer read(int id);
+public interface DeveloperDao {
+    Developer findById(int id);
 
     void create(Developer developer);
 

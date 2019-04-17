@@ -80,7 +80,7 @@ public class Developer extends Model {
 
     @PostLoad
     void postLoad() {
-        log.info("Developer " + getName() + " is read at " + getNowTime());
+        log.info("Developer " + getName() + " is findById at " + getNowTime());
     }
 
     @PreUpdate

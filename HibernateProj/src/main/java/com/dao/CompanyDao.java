@@ -2,11 +2,11 @@ package com.dao;
 
 import com.entity.Company;
 
-public interface CompanyDAO {
+public interface CompanyDao {
 
     void create(Company company);
 
-    Company read(int id);
+    Company findById(int id);
 
     void update(Company company);
 
