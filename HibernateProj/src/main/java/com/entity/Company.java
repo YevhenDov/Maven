@@ -84,6 +84,4 @@ public class Company extends Model {
     void postRemove() {
         log.info("Remove company: " + getName() + ", at" + getRemoveTime());
     }
-
-
 }
