@@ -31,10 +31,10 @@ public class Project extends Model {
     private String name;
 
     @Column(name = "dead_line")
-    private String deadLine;
+    private LocalDateTime deadLine;
 
     @Column(name = "cost")
-    private String cost;
+    private Integer cost;
 
     @ManyToMany(mappedBy = "projects")
     private Set<Developer> developers;

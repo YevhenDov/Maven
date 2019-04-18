@@ -1,5 +1,6 @@
 package com.entity;
 
+import com.enumrep.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -11,6 +12,8 @@ import lombok.extern.log4j.Log4j;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -38,13 +41,14 @@ public class Developer extends Model {
     private String name;
 
     @Column(name = "age")
-    private int age;
+    private Integer age;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private String gender;
 
     @Column(name = "salary")
-    private int salary;
+    private Integer salary;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
