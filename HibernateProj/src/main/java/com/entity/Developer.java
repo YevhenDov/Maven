@@ -45,7 +45,7 @@ public class Developer extends Model {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private String gender;
+    private Gender gender;
 
     @Column(name = "salary")
     private Integer salary;
