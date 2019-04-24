@@ -15,18 +15,16 @@ import java.util.List;
 @WebServlet("/create")
 public class CreateController extends HttpServlet {
     private DeveloperDaoImpl developerDaoImpl;
-    private Developer developer;
-    private List<Developer> developers = new ArrayList<>();
 
     @Override
     public void init() throws ServletException {
         developerDaoImpl = new DeveloperDaoImpl();
-        developer = new Developer();
-        developers = developerDaoImpl.findAll();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
+        Developer developer = new Developer();
+        List<Developer> developers = new ArrayList<>();
 
         request.setCharacterEncoding("UTF8");
         developer.setName(request.getParameter("name"));

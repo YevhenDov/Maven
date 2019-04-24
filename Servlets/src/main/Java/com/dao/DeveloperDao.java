@@ -3,9 +3,10 @@ package com.dao;
 import com.entity.Developer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeveloperDao {
-    Developer findById(int id);
+    Optional<Developer> findById(int id);
 
     void create(Developer developer);
 
