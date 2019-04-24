@@ -58,7 +58,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
         }
     }
 
-    public List<Developer> getAll(){
+    public List<Developer> findAll() {
         entityManager.getTransaction().begin();
         developers = entityManager.createQuery("SELECT developer FROM Developer developer", Developer.class).getResultList();
         entityManager.getTransaction().commit();

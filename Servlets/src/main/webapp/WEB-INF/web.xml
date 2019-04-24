@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4"
-         xmlns="http://java.sun.com/xml/ns/j2ee"
+<web-app version="3.1"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-
-    <servlet>
-        <servlet-name>CreateController</servlet-name>
-        <servlet-class>com.controllers.CreateController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CreateController</servlet-name>
-        <url-pattern>/create_developer</url-pattern>
-    </servlet-mapping>
-
-    <!--<servlet>-->
-        <!--<servlet-name>RemoveController</servlet-name>-->
-        <!--<servlet-class>com.controllers.RemoveController</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>RemoveController</servlet-name>-->
-        <!--<url-pattern>/remove_developer</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>UpdateController</servlet-name>-->
-        <!--<servlet-class>com.controllers.UpdateController</servlet-class>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>UpdateController</servlet-name>-->
-        <!--<url-pattern>/update_developer</url-pattern>-->
-    <!--</servlet-mapping>-->
-
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 </web-app>
-        

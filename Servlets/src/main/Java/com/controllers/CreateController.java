@@ -14,22 +14,15 @@ import java.util.List;
 
 @WebServlet("/create")
 public class CreateController extends HttpServlet {
-    private final static String PATH_TO_INDEX = "/WEB-INF/view/index.jsp";
     private DeveloperDaoImpl developerDaoImpl;
     private Developer developer;
-    List<Developer> developers = new ArrayList<>();
+    private List<Developer> developers = new ArrayList<>();
 
     @Override
     public void init() throws ServletException {
         developerDaoImpl = new DeveloperDaoImpl();
         developer = new Developer();
-        developers = developerDaoImpl.getAll();
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        request.setAttribute("developers", developers);
-        request.getRequestDispatcher(PATH_TO_INDEX).forward(request, response);
+        developers = developerDaoImpl.findAll();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,13 +33,8 @@ public class CreateController extends HttpServlet {
         developer.setAge(Integer.valueOf(request.getParameter("age")));
         developer.setSalary(Integer.valueOf(request.getParameter("salary")));
         developerDaoImpl.create(developer);
-        developers = developerDaoImpl.getAll();
+        developers = developerDaoImpl.findAll();
 
-        doGet(request, response);
-    }
-
-    @Override
-    public void destroy() {
-        System.out.println("End servlet");
+        response.sendRedirect(request.getContextPath() + "/list");
     }
 }

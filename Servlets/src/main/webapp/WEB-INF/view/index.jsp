@@ -13,7 +13,7 @@
         <li>Age: <c:out value="${developer.age}"/></li>
         <li>Salary: <c:out value="${developer.salary}"/></li>
 
-        <form method="post" action="/remove">
+        <form method="post" action="/remove_developer">
             <input type="number" hidden name="id" value="${developer.id}"/>
             <input type="submit" name="remove" value="Remove"/>
         </form>

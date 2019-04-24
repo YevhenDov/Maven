@@ -14,22 +14,15 @@ import java.util.List;
 
 @WebServlet("/remove")
 public class RemoveController extends HttpServlet {
-    private final static String PATH_TO_INDEX = "/WEB-INF/view/index.jsp";
     private DeveloperDaoImpl developerDaoImpl;
     private Developer developer;
-    List<Developer> developers = new ArrayList<>();
+    private List<Developer> developers = new ArrayList<>();
 
     @Override
-    public void init() {
+    public void init() throws ServletException{
         developerDaoImpl = new DeveloperDaoImpl();
         developer = new Developer();
-        developers = developerDaoImpl.getAll();
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        request.setAttribute("developers", developers);
-        request.getRequestDispatcher(PATH_TO_INDEX).forward(request, response);
+        developers = developerDaoImpl.findAll();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,8 +30,8 @@ public class RemoveController extends HttpServlet {
         request.setCharacterEncoding("UTF8");
 
         developerDaoImpl.delete(developerDaoImpl.findById(Integer.valueOf(request.getParameter("id"))));
-        developers = developerDaoImpl.getAll();
+        developers = developerDaoImpl.findAll();
 
-        doGet(request, response);
+        response.sendRedirect(request.getContextPath() + "/list");
     }
 }

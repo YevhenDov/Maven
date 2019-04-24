@@ -13,5 +13,5 @@ public interface DeveloperDao {
 
     void delete(Developer developer);
 
-    List<Developer> getAll();
+    List<Developer> findAll();
 }

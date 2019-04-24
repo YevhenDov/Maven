@@ -14,19 +14,12 @@ import java.util.List;
 
 @WebServlet("/update")
 public class UpdateController extends HttpServlet {
-    private final static String PATH_TO_INDEX = "/WEB-INF/view/index.jsp";
     private DeveloperDaoImpl developerDaoImpl;
-    List<Developer> developers = new ArrayList<>();
+    private List<Developer> developers = new ArrayList<>();
 
     public void init() {
         developerDaoImpl = new DeveloperDaoImpl();
-        developers = developerDaoImpl.getAll();
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        request.setAttribute("developers", developers);
-        request.getRequestDispatcher(PATH_TO_INDEX).forward(request, response);
+        developers = developerDaoImpl.findAll();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,8 +27,8 @@ public class UpdateController extends HttpServlet {
         request.setCharacterEncoding("UTF8");
 
         developerDaoImpl.update(developerDaoImpl.findById(Integer.valueOf(request.getParameter("id"))));
-        developers = developerDaoImpl.getAll();
+        developers = developerDaoImpl.findAll();
 
-        doGet(request, response);
+        response.sendRedirect(request.getContextPath() + "/list");
     }
 }
