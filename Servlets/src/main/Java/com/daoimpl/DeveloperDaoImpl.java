@@ -2,22 +2,20 @@ package com.daoimpl;
 
 import com.dao.DeveloperDao;
 import com.entity.Developer;
-import org.hibernate.Session;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DeveloperDaoImpl implements DeveloperDao {
+    private final String QUERY = "SELECT developer FROM Developer developer";
+
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
-    private List<Developer> developers = new CopyOnWriteArrayList<>();
 
     public Optional<Developer> findById(int id) {
         try {
@@ -63,8 +61,10 @@ public class DeveloperDaoImpl implements DeveloperDao {
     }
 
     public List<Developer> findAll() {
+        List<Developer> developers;
+
         entityManager.getTransaction().begin();
-        developers = entityManager.createQuery("SELECT developer FROM Developer developer", Developer.class).getResultList();
+        developers = entityManager.createQuery(QUERY, Developer.class).getResultList();
         entityManager.getTransaction().commit();
         if (developers == null){
             developers = new CopyOnWriteArrayList<>();
