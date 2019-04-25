@@ -24,14 +24,12 @@ public class CreateController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         Developer developer = new Developer();
-        List<Developer> developers = new ArrayList<>();
 
         request.setCharacterEncoding("UTF8");
         developer.setName(request.getParameter("name"));
         developer.setAge(Integer.valueOf(request.getParameter("age")));
         developer.setSalary(Integer.valueOf(request.getParameter("salary")));
         developerDaoImpl.create(developer);
-        developers = developerDaoImpl.findAll();
 
         response.sendRedirect(request.getContextPath() + "/list");
     }
