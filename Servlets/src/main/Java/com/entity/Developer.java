@@ -2,6 +2,7 @@ package com.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "developers")
+@EqualsAndHashCode(exclude = {"id"})
 public class Developer {
 
     @Id
