@@ -14,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/list")
 public class HomeController extends HttpServlet {
-    private final String PATH_TO_FILE = "WEB-INF/view/index.jsp";
+    private static final String PATH_TO_FILE = "WEB-INF/view/index.jsp";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {

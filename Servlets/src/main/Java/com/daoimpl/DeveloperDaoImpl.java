@@ -2,6 +2,7 @@ package com.daoimpl;
 
 import com.dao.DeveloperDao;
 import com.entity.Developer;
+import lombok.extern.log4j.Log4j;
 
 
 import javax.persistence.EntityManager;
@@ -11,8 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@Log4j
 public class DeveloperDaoImpl implements DeveloperDao {
-    private final String QUERY = "SELECT developer FROM Developer developer";
+    private static final String QUERY = "SELECT developer FROM Developer developer";
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -26,6 +28,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
             return optionalDeveloper;
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
+            log.error("Developer not founded: " + e.getMessage());
             return Optional.empty();
         }
     }
@@ -37,6 +40,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
+            log.error("Developer not created: " + e.getMessage());
         }
     }
 
@@ -47,6 +51,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
+            log.error("Developer not updated: " + e.getMessage());
         }
     }
 
@@ -57,18 +62,24 @@ public class DeveloperDaoImpl implements DeveloperDao {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
+            log.error("Developer not deleted: " + e.getMessage());
         }
     }
 
     public List<Developer> findAll() {
-        List<Developer> developers;
+        List<Developer> developers = new CopyOnWriteArrayList<>();
 
-        entityManager.getTransaction().begin();
-        developers = entityManager.createQuery(QUERY, Developer.class).getResultList();
-        entityManager.getTransaction().commit();
-        if (developers == null){
-            developers = new CopyOnWriteArrayList<>();
-            return developers;
+        try {
+
+            entityManager.getTransaction().begin();
+            developers = entityManager.createQuery(QUERY, Developer.class).getResultList();
+            entityManager.getTransaction().commit();
+            if (developers == null) {
+                developers = new CopyOnWriteArrayList<>();
+                return developers;
+            }
+        } catch (NullPointerException e){
+            log.error("Developers not founded: " +e.getMessage());
         }
         return developers;
     }
