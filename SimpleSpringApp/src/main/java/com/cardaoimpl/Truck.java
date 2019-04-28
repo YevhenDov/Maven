@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
+
 @Log4j
 @Setter
 @Component
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class Truck implements Car {
 
     @Value("${payload}")
-    private String  payload;
+    private String payload;
 
     @Override
     public void move() {

@@ -11,6 +11,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Log4j
 @Getter
 @Component
@@ -28,5 +31,15 @@ public class Sedan implements Car {
     @Override
     public void move() {
         log.info("Sedan is moving...");
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        log.info("Bean 'Sedan' is initialized");
+    }
+
+    @PreDestroy
+    private void preDestroy() {
+        log.info("Bean 'Sedan' is destroyed");
     }
 }
