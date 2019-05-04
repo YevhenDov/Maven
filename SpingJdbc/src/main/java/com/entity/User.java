@@ -1,5 +1,6 @@
 package com.entity;
 
+import com.annotation.InjectRandomInt;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @InjectRandomInt(min = 18, max = 30)
     @Column(name = "age")
     private Integer age;
 }
