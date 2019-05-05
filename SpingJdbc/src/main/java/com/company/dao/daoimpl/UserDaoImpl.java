@@ -1,16 +1,16 @@
-package com.dao.daoimpl;
+package com.company.dao.daoimpl;
 
-import com.dao.UserDao;
-import com.entity.User;
+import com.company.dao.UserDao;
+import com.company.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Optional;
 
-@Component("userDaoImpl")
+@Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao {
     private static final String CREATE = "INSERT INTO users (name, age) VALUES (?, ?)";
     private static final String READ = "SELECT * FROM users WHERE id = ?";
@@ -19,8 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    public void setJdbcTemplate(DataSource dataSource) {
+    public UserDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
@@ -31,8 +30,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getUserById(int id) {
-        User user = jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class));
-        Optional<User> optionalUser = Optional.of(user);
+        Optional<User> optionalUser = Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class)));
         return optionalUser;
     }
 

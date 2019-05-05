@@ -1,6 +1,6 @@
-package com.dao;
+package com.company.dao;
 
-import com.entity.User;
+import com.company.entity.User;
 
 import java.util.Optional;
 

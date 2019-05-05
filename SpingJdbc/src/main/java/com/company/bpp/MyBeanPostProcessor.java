@@ -1,6 +1,6 @@
-package com.bpp;
+package com.company.bpp;
 
-import com.annotation.InjectRandomInt;
+import com.company.annotation.InjectRandomInt;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -23,11 +23,11 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
                 int min = annotation.min();
                 int max = annotation.max();
                 Random random = new Random();
-                int i = min + random.nextInt(max - min);
+                int randomInt = min + random.nextInt(max - min);
                 field.setAccessible(true);
-                ReflectionUtils.setField(field, bean, i);
+                ReflectionUtils.setField(field, bean, randomInt);
 
-                log.info("Random int = " + i);
+                log.info("Random int = " + randomInt);
             }
         }
 

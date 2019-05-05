@@ -1,6 +1,6 @@
-package com.entity;
+package com.company.entity;
 
-import com.annotation.InjectRandomInt;
+import com.company.annotation.InjectRandomInt;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

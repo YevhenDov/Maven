@@ -1,6 +1,6 @@
-package com.dao.daoimpl;
+package com.company.dao.daoimpl;
 
-import com.entity.User;
+import com.company.entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -63,7 +63,7 @@ public class UserDaoImplTest {
         userActual.setName("John");
         userDao.createUser(userActual);
 
-        userDao.deleteUser(2);
+        userDao.deleteUser(3);
         userActual = userDao.getUserById(2).get();
 
         assertEquals(userExpected, userActual);
