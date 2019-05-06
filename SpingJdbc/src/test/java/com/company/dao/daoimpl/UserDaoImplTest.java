@@ -1,35 +1,34 @@
 package com.company.dao.daoimpl;
 
 import com.company.entity.User;
+import com.company.servce.impl.UserServiceImpl;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UserDaoImplTest {
-    ApplicationContext context;
-    UserDaoImpl userDao;
     User userActual;
     User userExpected;
+    UserServiceImpl userService;
+    final static String PATH_TO_CONTEXT = "META-INF/spring/test-context.xml";
 
     @Before
     public void beforeTest() {
-        context = new ClassPathXmlApplicationContext("META-INF/spring/context.xml");
-        userDao = (UserDaoImpl) context.getBean("userDaoImpl");
-        userActual = (User) context.getBean("user");
-        userExpected = (User) context.getBean("user");
+        userActual = new User();
+        userExpected = new User();
+        userService = new UserServiceImpl();
     }
 
     @Test
     public void createUser() {
         userActual.setAge(20);
         userActual.setName("Bob");
-        userDao.createUser(userActual);
+        userService.createUser(userActual);
 
-        User user = userDao.getUserById(2).get();
-        userExpected = (User) context.getBean("user");
+        User user = userService.getUserById(1).get();
         userExpected.setName(user.getName());
         userExpected.setAge(user.getAge());
         assertEquals(userExpected, userActual);
@@ -37,35 +36,30 @@ public class UserDaoImplTest {
 
     @Test
     public void getUserById() {
-        userExpected.setId(2);
+        userExpected.setId(1);
         userExpected.setAge(20);
         userExpected.setName("Bob");
 
-        userActual = userDao.getUserById(2).get();
-        assertEquals(userExpected, userActual);
+        userActual = userService.getUserById(1).get();
+        Assert.assertEquals(userExpected, userActual);
     }
 
     @Test
     public void updateUser() {
-        userExpected.setId(2);
+        userExpected.setId(1);
         userExpected.setAge(25);
         userExpected.setName("Marry");
 
-        userDao.updateUser(2, userExpected);
-        userActual = userDao.getUserById(2).get();
+        userService.updateUser(1, userExpected);
+        userActual = userService.getUserById(1).get();
 
         assertEquals(userExpected, userActual);
     }
 
     @Test
     public void deleteUser() {
-        userActual.setAge(15);
-        userActual.setName("John");
-        userDao.createUser(userActual);
+        userService.deleteUser(1);
 
-        userDao.deleteUser(3);
-        userActual = userDao.getUserById(2).get();
-
-        assertEquals(userExpected, userActual);
+        assertTrue(userService.getUserById(1).get() == null);
     }
 }

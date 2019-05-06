@@ -2,7 +2,6 @@ package com.company.dao.daoimpl;
 
 import com.company.dao.UserDao;
 import com.company.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
