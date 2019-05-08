@@ -31,10 +31,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> getUserById(int id) {
         try {
-            Optional<User> optionalUser = Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class)));
-            return optionalUser;
+            return Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class)));
         } catch (EmptyResultDataAccessException e){
-            return null;
+            return Optional.empty();
         }
     }
 
