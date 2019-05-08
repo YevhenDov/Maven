@@ -2,6 +2,7 @@ package com.company.dao.daoimpl;
 
 import com.company.dao.UserDao;
 import com.company.entity.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -29,8 +30,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getUserById(int id) {
-        Optional<User> optionalUser = Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class)));
-        return optionalUser;
+        try {
+            Optional<User> optionalUser = Optional.of(jdbcTemplate.queryForObject(READ, new Object[]{id}, new BeanPropertyRowMapper<>(User.class)));
+            return optionalUser;
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override
