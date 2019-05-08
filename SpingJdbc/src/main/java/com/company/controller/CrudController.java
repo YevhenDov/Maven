@@ -1,10 +1,8 @@
 package com.company.controller;
 
-import com.company.dao.daoimpl.UserDaoImpl;
 import com.company.entity.User;
-import com.company.servce.impl.UserServiceImpl;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.company.servce.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CrudController {
-    private UserServiceImpl userService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {

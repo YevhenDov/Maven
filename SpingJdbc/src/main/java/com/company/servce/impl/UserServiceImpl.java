@@ -1,14 +1,14 @@
 package com.company.servce.impl;
 
-import com.company.dao.daoimpl.UserDaoImpl;
+import com.company.dao.UserDao;
 import com.company.entity.User;
 import com.company.servce.UserService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @Log4j
@@ -16,13 +16,14 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final String PATH_TO_FILE = "META-INF/spring/context.xml";
 
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
-    @PostConstruct
-    public void init() {
+    @Bean
+    public UserDao init() {
         ApplicationContext context = new ClassPathXmlApplicationContext(PATH_TO_FILE);
-        userDao = (UserDaoImpl) context.getBean("userDaoImpl");
+        userDao = (UserDao) context.getBean("userDaoImpl");
         log.info("Init UserService");
+        return userDao;
     }
 
     @Override
