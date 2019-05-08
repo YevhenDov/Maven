@@ -2,7 +2,6 @@ package com.company.dao.daoimpl;
 
 import com.company.entity.User;
 import com.company.servce.impl.UserServiceImpl;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,16 +9,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class UserDaoImplTest {
-    User userActual;
-    User userExpected;
-    UserServiceImpl userService;
-    final static String PATH_TO_CONTEXT = "META-INF/spring/test-context.xml";
+    private User userActual;
+    private User userExpected;
+    private UserServiceImpl userService;
 
     @Before
     public void beforeTest() {
         userActual = new User();
         userExpected = new User();
         userService = new UserServiceImpl();
+        userService.init();
     }
 
     @Test
@@ -41,7 +40,7 @@ public class UserDaoImplTest {
         userExpected.setName("Bob");
 
         userActual = userService.getUserById(1).get();
-        Assert.assertEquals(userExpected, userActual);
+        assertEquals(userExpected, userActual);
     }
 
     @Test

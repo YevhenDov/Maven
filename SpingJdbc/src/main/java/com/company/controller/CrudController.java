@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CrudController {
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {

@@ -12,7 +12,6 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Component("user")
 public class User {
 
     @Id
