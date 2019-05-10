@@ -44,7 +44,7 @@ public class ApplicationConfig {
     private String FORMAT_SQL;
 
     @Bean
-    DriverManagerDataSource dataSource(){
+    DriverManagerDataSource dataSource() {
         DriverManagerDataSource managerDataSource = new DriverManagerDataSource();
         managerDataSource.setDriverClassName(DRIVER);
         managerDataSource.setUrl(URL);
@@ -54,7 +54,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean managerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         managerFactoryBean.setDataSource(dataSource());
         managerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -63,7 +63,7 @@ public class ApplicationConfig {
         return managerFactoryBean;
     }
 
-    Properties jpaProperties(){
+    Properties jpaProperties() {
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("hibernate.dialect", HIBERNATE_DIALECT);
         jpaProperties.setProperty("hibernate.show_sql", SHOW_SQL);
@@ -73,7 +73,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    JpaTransactionManager transactionManager(){
+    JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;

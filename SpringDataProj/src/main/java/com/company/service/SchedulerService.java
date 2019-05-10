@@ -20,18 +20,18 @@ public class SchedulerService {
     private final MailService mailService;
 
     @Scheduled(cron = CRON)
-    public void sendMailtoUsers(){
+    public void sendMailtoUsers() {
         LocalDate date = LocalDate.now();
         int month = date.getMonthValue();
         int day = date.getDayOfMonth();
         List<User> usersBirthdays = userService.getAllUsers(month, day);
-        if(!usersBirthdays.isEmpty()){
+        if (!usersBirthdays.isEmpty()) {
             usersBirthdays.forEach(user -> {
                 try {
                     String message = "Happy Birthday dear " + user.getName() + "!";
                     mailService.sendMail(user.getEmail(), "Happy Birthday!", message);
                     log.info("Email have been sent. User " + user.getId() + " Date: " + date);
-                } catch (Exception e){
+                } catch (Exception e) {
                     log.error("Email can't be sent. User " + user.getId() + " Date: " + date);
                     log.error("Email can't be sent. " + e.getMessage());
                 }

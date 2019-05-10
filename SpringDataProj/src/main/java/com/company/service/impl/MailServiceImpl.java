@@ -1,6 +1,5 @@
 package com.company.service.impl;
 
-import com.company.repository.UserRepository;
 import com.company.service.MailService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class MailServiceImpl implements MailService {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(text);
-        } catch (MessagingException e){
+        } catch (MessagingException e) {
             log.info("email not send" + e.getMessage());
         }
     }
