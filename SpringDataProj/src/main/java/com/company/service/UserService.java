@@ -13,7 +13,9 @@ public interface UserService {
 
     void updateUser(User user);
 
-    void deleteUser(User user);
+    void deleteUserById(int id);
 
-    List<User> getAllUsers(int month, int day);
+    List<User> getAllUsersByMonthAndDate(int month, int day);
+
+    List<User> getAllUsers();
 }

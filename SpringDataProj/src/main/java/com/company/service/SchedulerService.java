@@ -24,7 +24,7 @@ public class SchedulerService {
         LocalDate date = LocalDate.now();
         int month = date.getMonthValue();
         int day = date.getDayOfMonth();
-        List<User> usersBirthdays = userService.getAllUsers(month, day);
+        List<User> usersBirthdays = userService.getAllUsersByMonthAndDate(month, day);
         if (!usersBirthdays.isEmpty()) {
             usersBirthdays.forEach(user -> {
                 try {

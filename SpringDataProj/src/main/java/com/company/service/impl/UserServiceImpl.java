@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServiceUserImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
@@ -31,12 +31,17 @@ public class ServiceUserImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) {
-        repository.delete(user);
+    public void deleteUserById(int id) {
+        repository.deleteById(id);
     }
 
     @Override
-    public List<User> getAllUsers(int month, int day) {
+    public List<User> getAllUsersByMonthAndDate(int month, int day) {
         return repository.findByMatchMonthAndMatchDay(month, day);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return repository.findAll();
     }
 }
