@@ -19,8 +19,9 @@ import static org.junit.Assert.assertFalse;
 @ContextConfiguration(classes = TestApplicationConfig.class)
 public class ServiceUserImplTest {
     @Autowired
-    UserService service;
-    User user;
+    private UserService service;
+
+    private User user;
 
     @Before
     public void init() {
@@ -38,13 +39,13 @@ public class ServiceUserImplTest {
 
     @Test
     public void createUser() {
-        assertEquals(service.getUserById(user.getId()).get(), user);
+        assertEquals(service.getUserById(user.getId()), user);
     }
 
     @Test
     public void getUserById() {
         int id = user.getId();
-        assertEquals(service.getUserById(id).get(), user);
+        assertEquals(service.getUserById(id), user);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class ServiceUserImplTest {
         user.setName("update");
         service.updateUser(user);
         int id = user.getId();
-        assertEquals(service.getUserById(id).get(), user);
+        assertEquals(service.getUserById(id), user);
 
     }
 

@@ -36,5 +36,6 @@ public class User {
     LocalDate birthDay;
 
     @Email
+    @Column(name = "email")
     private String email;
 }
