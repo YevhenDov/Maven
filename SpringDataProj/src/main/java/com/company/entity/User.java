@@ -7,9 +7,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import java.time.LocalDate;
@@ -20,20 +17,13 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 @Entity
 @Table(name = "Users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends CreatableEntity {
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "age")
     private Integer age;
-
-    @Column(name = "birthday")
-    LocalDate birthDay;
 
     @Email
     @Column(name = "email")

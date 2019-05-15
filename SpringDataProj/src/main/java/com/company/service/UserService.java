@@ -4,7 +4,6 @@ package com.company.service;
 import com.company.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     void createUser(User user);
@@ -13,7 +12,7 @@ public interface UserService {
 
     void updateUser(User user);
 
-    void deleteUserById(int id);
+    void deleteUserById(Integer id);
 
     List<User> getAllUsersByMonthAndDate(int month, int day);
 
