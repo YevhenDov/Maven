@@ -1,11 +1,13 @@
 package com.company.service.impl;
 
 import com.company.entity.User;
+import com.company.interceptor.SimpleLogger;
 import com.company.repository.UserRepository;
 import com.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 @Service
@@ -15,6 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
+    @Interceptors(SimpleLogger.class)
     public void createUser(User user) {
         repository.save(user);
     }

@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDateTime;
 
 @Data
 @MappedSuperclass
@@ -13,5 +14,5 @@ import javax.persistence.MappedSuperclass;
 public class CreatableEntity extends BaseEntity {
 
     @Column(name = "created_date")
-    private Long createdDate;
+    private LocalDateTime createdDate;
 }
