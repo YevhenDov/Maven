@@ -12,10 +12,8 @@ public class UserTransformer {
     @Autowired
     private UserEntityRepository repository;
 
-    private UserEntity userEntity;
-
     public UserEntity buildEntity(User user) {
-        userEntity = new UserEntity();
+        UserEntity userEntity = new UserEntity();
 
         userEntity.setId(user.getId());
         userEntity.setName(user.getName());

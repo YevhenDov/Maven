@@ -1,7 +1,6 @@
 package com.company.controller;
 
 import com.company.dto.User;
-import com.company.entity.UserEntity;
 import com.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
