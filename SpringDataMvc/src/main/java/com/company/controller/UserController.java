@@ -38,8 +38,8 @@ public class UserController {
         return "new_user";
     }
 
-    @PostMapping("/save")
-    public String addUser(@ModelAttribute("user") User user) {
+    @PostMapping("/addOrUpdate")
+    public String addOrUpdate(@ModelAttribute("user") User user) {
         service.createUser(user);
 
         return "redirect:/";

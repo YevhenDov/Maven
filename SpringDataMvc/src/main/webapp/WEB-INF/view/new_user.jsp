@@ -2,12 +2,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Add userEntity</title>
+    <title>Add user</title>
 </head>
 <body>
 <div align="center">
-    <h2>Create userEntity</h2>
-    <form:form action="save" method="post" modelAttribute="user">
+    <h2>Create user</h2>
+    <form:form action="addOrUpdate" method="post" modelAttribute="user">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Name</td>

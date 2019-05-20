@@ -6,7 +6,7 @@
 </head>
 <body>
 <div align="center">
-    <h1>Users manager</h1>
+    <h1>User manager</h1>
     <h3><a href="/add">Add User</a></h3>
     <table border="1" padding="5">
         <tr>
