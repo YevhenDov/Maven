@@ -26,10 +26,10 @@
                 <td>${user.email}</td>
                 <td>${user.createdDate}</td>
                 <td>
-                    <a href="edit?id=${user.id}">Edit</a>
+                    <a href="edit/${user.id}">Edit</a>
                 </td>
                 <td>
-                    <a href="delete?id=${user.id}">Delete</a>
+                    <a href="delete/${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
