@@ -1,6 +1,5 @@
 package com.company.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -11,12 +10,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
 @Table(name = "Users")
-public class User extends CreatableEntity {
+public class UserEntity extends CreatableEntity {
 
     @Column(name = "name")
     private String name;

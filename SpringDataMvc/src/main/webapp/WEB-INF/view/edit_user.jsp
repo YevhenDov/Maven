@@ -2,16 +2,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Edit user</title>
+    <title>Edit userEntity</title>
 </head>
 <body>
 <div align="center">
-    <h2>Edit user</h2>
-    <form:form action="save" method="post" modelAttribute="user">
+    <h2>Edit userEntity</h2>
+    <form:form action="save" method="post" modelAttribute="userEntity">
         <table border="0" cellpadding="5">
             <tr>
                 <td>ID:</td>
-                <td>${user.id}
+                <td>${userEntity.id}
                     <form:hidden path="id"/>
                 </td>
             </tr>

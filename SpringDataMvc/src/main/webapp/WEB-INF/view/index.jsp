@@ -18,18 +18,18 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="userEntity" items="${userEntities}">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td>${user.age}</td>
-                <td>${user.email}</td>
-                <td>${user.createdDate}</td>
+                <td>${userEntity.id}</td>
+                <td>${userEntity.name}</td>
+                <td>${userEntity.age}</td>
+                <td>${userEntity.email}</td>
+                <td>${userEntity.createdDate}</td>
                 <td>
-                    <a href="edit?id=${user.id}">Edit</a>
+                    <a href="edit?id=${userEntity.id}">Edit</a>
                 </td>
                 <td>
-                    <a href="delete?id=${user.id}">Delete</a>
+                    <a href="delete?id=${userEntity.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

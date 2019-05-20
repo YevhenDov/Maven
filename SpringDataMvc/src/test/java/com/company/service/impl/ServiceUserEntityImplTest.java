@@ -1,6 +1,7 @@
 package com.company.service.impl;
 
-import com.company.entity.User;
+import com.company.dto.User;
+import com.company.entity.UserEntity;
 import com.company.service.UserService;
 import com.company.config.TestApplicationConfig;
 import org.junit.After;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestApplicationConfig.class)
-public class ServiceUserImplTest {
+public class ServiceUserEntityImplTest {
     @Autowired
     private UserService service;
 
@@ -70,7 +71,7 @@ public class ServiceUserImplTest {
     @Test
     public void getAllUsers() {
         User newUser = new User()
-                .setName("New User");
+                .setName("New UserEntity");
         service.createUser(newUser);
         assertTrue(service.getAllUsers().size() == 2);
     }

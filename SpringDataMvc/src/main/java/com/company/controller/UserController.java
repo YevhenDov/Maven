@@ -1,6 +1,7 @@
 package com.company.controller;
 
-import com.company.entity.User;
+import com.company.dto.User;
+import com.company.entity.UserEntity;
 import com.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,8 +25,8 @@ public class UserController {
     @GetMapping("/")
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("index");
-        List<User> users = service.getAllUsers();
-        modelAndView.addObject("users", users);
+        List<User> allUsers = service.getAllUsers();
+        modelAndView.addObject("users", allUsers);
 
         return modelAndView;
     }
