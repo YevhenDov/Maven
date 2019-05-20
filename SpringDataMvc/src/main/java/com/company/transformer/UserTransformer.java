@@ -5,38 +5,33 @@ import com.company.entity.UserEntity;
 import com.company.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class UserTransformer {
 
     @Autowired
-    UserEntityRepository repository;
+    private UserEntityRepository repository;
 
-    UserEntity userEntity;
+    private UserEntity userEntity;
 
-    public UserEntity buildEntity(User user){
-        if (user.getId() == null) {
-            userEntity = new UserEntity();
-        }
-        else
-            userEntity = repository.findById(user.getId()).get();
+    public UserEntity buildEntity(User user) {
+        userEntity = new UserEntity();
 
+        userEntity.setId(user.getId());
         userEntity.setName(user.getName());
+        userEntity.setAge(user.getAge());
         userEntity.setEmail(user.getEmail());
 
         return userEntity;
     }
 
-    public User buildUser(UserEntity userEntity){
+    public User buildUser(UserEntity userEntity) {
         User user = new User()
                 .setName(userEntity.getName())
                 .setAge(userEntity.getAge())
                 .setEmail(userEntity.getEmail())
-                .setCreateDate(userEntity.getCreatedDate());
-
-        if (userEntity.getId() != null)
-            user.setId(userEntity.getId());
+                .setCreatedDate(userEntity.getCreatedDate())
+                .setId(userEntity.getId());
 
         return user;
     }
