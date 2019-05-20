@@ -8,10 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserTransformer {
-
-    @Autowired
-    private UserEntityRepository repository;
-
     public UserEntity buildEntity(User user) {
         UserEntity userEntity = new UserEntity();
 
