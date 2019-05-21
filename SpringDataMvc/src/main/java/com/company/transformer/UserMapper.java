@@ -2,13 +2,15 @@ package com.company.transformer;
 
 import com.company.dto.User;
 import com.company.entity.UserEntity;
-import com.company.repository.UserEntityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 @Component
-public class UserTransformer {
-    public UserEntity buildEntity(User user) {
+public class UserMapper {
+    public UserEntity mapUserToUserEntity(User user) {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setId(user.getId());
@@ -19,14 +21,19 @@ public class UserTransformer {
         return userEntity;
     }
 
-    public User buildUser(UserEntity userEntity) {
-        User user = new User()
+    public User mapUserEntityToUser(UserEntity userEntity) {
+        return new User()
                 .setName(userEntity.getName())
                 .setAge(userEntity.getAge())
                 .setEmail(userEntity.getEmail())
                 .setCreatedDate(userEntity.getCreatedDate())
                 .setId(userEntity.getId());
+    }
 
-        return user;
+    public List<User> mapUserEntityListToUserList(List<UserEntity> userEntities){
+        return userEntities
+                .stream()
+                .map(this::mapUserEntityToUser)
+                .collect(toList());
     }
 }
